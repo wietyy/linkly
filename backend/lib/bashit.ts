@@ -3,6 +3,9 @@ import { promisify } from "util";
 
 const execAsync = promisify(exec);
 
+
+// ladies and gentlemen, this is the solution to all problems in life
+// created 5/19/26 by wietyy
 export async function bashit(command: string): Promise<string> {
     try {
         const { stdout } = await execAsync(command);

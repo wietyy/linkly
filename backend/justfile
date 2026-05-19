@@ -1,5 +1,9 @@
 dev:
     @bun --watch --hot index.ts
+
+# setup-db: used when you want to setup the database,
+# or when the code bugs out because im being a dumbass
+# ive probably used this at least 100 times by now
 setup-db:
     @mkdir -p db
     @touch db/database.db
