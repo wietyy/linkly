@@ -1,4 +1,4 @@
-# linkly (dev branch)
+# linkly (dev branch lol)
 URL Shortener. Who needs a long ahh description?
 
 features:
