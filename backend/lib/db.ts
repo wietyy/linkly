@@ -1,4 +1,3 @@
-// TODO: link up to supabase
 
 // TODO: Create this function
 async function createLink(linkId: string, link: string): Promise<string> {
