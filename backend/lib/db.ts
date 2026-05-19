@@ -8,7 +8,6 @@ async function createLink(linkId: string, link: string): Promise<string> {
     return linkId;
 }
 
-// TODO: Create this function
 async function getLink(linkId: string): Promise<string> {
     // its so beautiful isnt it
     let output = await bashit(`sqlite3 ./db/database.db "SELECT link FROM links WHERE id = '${linkId}'"`);
