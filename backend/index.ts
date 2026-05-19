@@ -13,6 +13,7 @@ app.use(express.json());
 app.get("/:linkId", async (req: any, res: any) => {
     let linkId = req.params.linkId;
     let link: string = await getLink(linkId);
+    console.log(link)
     res.redirect(link);
 })
 

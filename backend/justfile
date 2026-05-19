@@ -1,2 +1,7 @@
 dev:
     @bun --watch --hot index.ts
+setup-db:
+    @mkdir -p db
+    @touch db/database.db
+    @sqlite3 database.db < ./db/schema.sql
+    echo "Database setup complete."
