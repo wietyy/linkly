@@ -1,24 +1,35 @@
-import { exec } from "child_process";
-import { promisify } from "util";
+import { spawn } from "child_process";
 
-const execAsync = promisify(exec);
+// ladies and gentlemen, the solution to all problems
+// created 5/19/2026
+export function bashit(cmd: string, args: string[] = []): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const child = spawn(cmd, args, {
+            shell: false,
+            windowsHide: true,
+        });
 
+        let stdout = "";
+        let stderr = "";
 
-// ladies and gentlemen, this is the solution to all problems in life
-// created 5/19/26 by wietyy
-export async function bashit(command: string): Promise<string> {
-    try {
-        const { stdout } = await execAsync(command);
-        return stdout.trim();
-    } catch (err: any) {
-        // include stderr if available for debugging
-        const message =
-            err?.stderr?.toString()?.trim() ||
-            err?.message ||
-            "Unknown error running bash command";
+        child.stdout.on("data", (d) => {
+            stdout += d.toString();
+        });
 
-        throw new Error(message);
-    }
+        child.stderr.on("data", (d) => {
+            stderr += d.toString();
+        });
+
+        child.on("close", (code) => {
+            if (code === 0) {
+                resolve(stdout.trim());
+            } else {
+                reject(new Error(stderr || `Exit code ${code}`));
+            }
+        });
+
+        child.on("error", reject);
+    });
 }
 
 export default bashit;
